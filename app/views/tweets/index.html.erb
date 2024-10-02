@@ -1,0 +1,16 @@
+<h1>ツイート一覧</h1>
+
+<%= link_to '新しいツイート', new_tweet_path %>
+
+<ul>
+  <% @tweets.each do |tweet| %>
+    <li>
+      <%= link_to tweet.message, tweet_path(tweet) %>
+      <small><%= distance_of_time_in_words_to_now(tweet.tdate) %>前</small>
+      <%= link_to '編集', edit_tweet_path(tweet) %>
+      <%= form_with url: tweet_path(tweet), method: :delete, local: true do %>
+        <%= submit_tag '削除', data: { confirm: '本当に削除しますか？' } %>
+      <% end %>
+    </li>
+  <% end %>
+</ul>
